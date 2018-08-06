@@ -1,0 +1,43 @@
+.custom-tabs {
+    text-align: center;
+    .nav {
+    display: inline-block; background: #fff; border-radius: 50px;border: solid 1px #e5e9f2; margin: 20px 0;
+    > li.active > a, > li.active > a:focus, > li.active > a:hover {
+        background: #8c91da !important; border-radius: 50px; color: #fff !important;}
+    > li > a:focus, > li > a:hover {
+        background: none !important;}
+    li {
+        width: 150px; text-align: center;
+        a {
+            color:#000 !important;
+        }        
+    }   
+}
+.tab-content { text-align: left;}
+} 
+.dialog {
+    width: 90%;
+    max-width: 920px !important;}
+
+.location-section { box-shadow: 0 2px 4px 0 rgba(231, 231, 231, 0.31); background-color: #ffffff; border: solid 1px #e5e9f2; border-radius: 6px; position: relative; margin: 10px 0; height: 260px; overflow: hidden;
+    &:hover{
+        .edit { display: block !important;}
+    }
+    h4 { margin: 0; color: #000; line-height: 20px; font-size:12px; padding: 10px; position: absolute; background-color: #ffffff; z-index: 1;}
+    .edit { position: absolute; top: 10px !important; right: 10px !important; color: #8c91da; font-size: 20px; z-index: 9; display: none; cursor: pointer;}        
+    .map { position: relative; bottom: 0; z-index: 0;}
+}
+.add-location {background: #e4e7f3 !important; cursor: pointer;
+    h2 {font-size: 22px; color: #000; padding-left: 10px; margin-bottom: 10px;}
+    h3 {font-size: 16px; color: #9d9d9d; padding-left: 10px; margin-top: 10px; margin-bottom: 10px; line-height: 22px;}
+    .add-location-bottom { position:absolute; bottom: 10px;left:10px;}
+    .location-plus { position: absolute; top: 2px; right: 2px; background:#fff; padding: 15px 15px 20px 20px; border-radius: 6px 6px 6px 50px; color:#e4e7f3; font-weight: lighter; font-size: 20px;}        
+}
+
+.trip-section { min-height: 300px; position: relative; box-shadow: 0 2px 4px 0 rgba(231, 231, 231, 0.31); background-color: #ffffff; border: solid 1px #e5e9f2; border-radius: 6px; padding: 20px; width: 100%; float:left; margin: 10px 0;}
+.trip-sub { background: #f4f4ff; padding: 10px; width:auto; float:left; border-radius: 4px;}
+.trip-sub2 { width:85% !important; padding-top: 15px; position: absolute; bottom: 20px;}
+.trip-title { float: left; width: 100%; margin: 10px 0 15px 0;}
+.trip-title h4 { font-size: 13px; line-height: 16px;}
+.trip-sub h3 { margin:0; font-size: 16px; line-height: 20px; color: #8E93DB;}
+.trip-sub p { color: #555886; font-size: 13px; margin-top: 12px;}

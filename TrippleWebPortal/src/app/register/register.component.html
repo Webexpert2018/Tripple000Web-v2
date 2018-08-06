@@ -1,0 +1,98 @@
+<div class="text-center">
+  <div class="login">
+    <h1>Sign Up</h1>
+    <form name="form" (ngSubmit)="f.form.valid && registerUser()" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-12 col-xs-12 m-b-10">
+          <div class="form-group ">
+            <label>FirstName</label>
+            <input type="text" class="form-control custom_form " placeholder="" name="UserFirstName" [(ngModel)]="model.UserFirstName"
+              #UserFirstName="ngModel" required>
+            <div *ngIf="f.submitted && UserFirstName.invalid" class="invalid-feedback" class="text-danger">
+              <div *ngIf="UserFirstName.errors.required">
+                FirstName is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xs-12 m-b-10">
+          <div class="form-group ">
+            <label>LastName</label>
+            <input type="text" class="form-control custom_form" placeholder="" name="UserLastName" [(ngModel)]="model.UserLastName" #UserLastName="ngModel"
+              required>
+            <div *ngIf="f.submitted && UserLastName.invalid" class="invalid-feedback" class="text-danger">
+              <div *ngIf="UserLastName.errors.required">
+                LastName is required
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-12 col-xs-12 m-b-10">
+          <div class="form-group ">
+            <label>Email</label>
+            <input type="email" email class="form-control custom_form email" placeholder="" name="UserEmail" [(ngModel)]="model.UserEmail"
+              #UserEmail="ngModel" required>
+            <div *ngIf="f.submitted && UserEmail.invalid" class="invalid-feedback" class="text-danger">
+              <div *ngIf="UserEmail.errors.required">
+                Email is required
+              </div>
+            </div>
+            <div *ngIf="UserEmail.errors?.email" class="text-danger">
+              Email is not valid.
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xs-12 m-b-10">
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control custom_form" placeholder="" name="UserPassword" [(ngModel)]="model.UserPassword"
+              #UserPassword="ngModel" required>
+            <i class="fa fa-eye eye_icon" aria-hidden="true"></i>
+            <div *ngIf="f.submitted && UserPassword.invalid && (UserPassword.dirty||UserPassword.touched)" class="text-danger">
+              <div *ngIf="UserPassword.errors['required']">Password is required</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-xs-12 m-b-10">
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <!-- <input type="password" class="form-control custom_form" name="confirmPassword" 
+            ngModel #confirmPassword="ngModel" [(ngModel)]="model.confirmPassword" required 
+            validateEqual="UserPassword" reverse="false">
+            <i class="fa fa-eye eye_icon" aria-hidden="true"></i>
+            <div *ngIf="!confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
+                Password mismatch
+              </div> -->
+            <input type="password" class="form-control custom_form" name="confirmPassword" ngModel #confirmPassword="ngModel" 
+            required compare="UserPassword">
+            <div *ngIf="f.submitted && confirmPassword.invalid && (confirmPassword.dirty||confirmPassword.touched)" class="text-danger">
+              <div *ngIf="confirmPassword.errors['required']">Password confirm is required</div>
+              <div *ngIf="confirmPassword.errors['compare']">Password confirm do not match</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-xs-12">
+          <!-- <button type="button" (click)="registerUser();"class="btn btn_signin">Sign Up</button> -->
+          <button class="btn btn_signin">Sign Up</button>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <div *ngIf="error" class="alert alert-danger clear">{{error}}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div *ngIf="success" class="alert alert-danger clear">{{success}}</div>
+          </div>
+        </div>
+        <!-- <div class="col-sm-12 col-xs-12">
+          <button type="button" class="btn register_btn" (click)='showLoginDialogbox()'>Sign In</button>
+        </div> -->
+      </div>
+    </form>
+    <br>
+  </div>
+</div>

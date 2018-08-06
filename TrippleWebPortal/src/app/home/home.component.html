@@ -1,0 +1,19 @@
+<header>
+  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="../../assets/img/logo.png" alt="Logo"></a>
+        </div>        
+        <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a (click)="showLoginDialogbox()">Sign In</a></li>
+            <li><a (click)="showRegisterDialogbox()">Sign Up</a></li>
+        </ul>
+    </div>
+</nav>
+</header>
+<app-dialog [(visible)]="showLoginDialog">
+    <app-login></app-login>
+</app-dialog>
+<app-dialog [(visible)]="showRegisterDialog">
+    <app-register></app-register>
+</app-dialog>

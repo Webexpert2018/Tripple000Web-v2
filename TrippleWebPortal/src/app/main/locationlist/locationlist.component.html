@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-sm-3">
+    <div class="location-section add-location" id="btnshowlocationdia" (click)="showDialogbox()">
+      <span class="fa fa-plus location-plus"></span>
+      <div class="add-location-bottom">
+        <h2>Add Location</h2>
+        <h3>Press on this box to add new location.</h3>
+      </div>
+    </div>
+  </div>
+  <div *ngFor="let location of locationsdata ; let i = index;" class="col-sm-3">
+    <div class="location-section">
+      <span class="fa fa-pencil edit" (click)="editlocation(location.id)"></span>
+      <h4>{{location.name}}
+        <br> {{location.addressDisplay}}
+      </h4>
+      <div class="map">
+          <img src="https://maps.googleapis.com/maps/api/staticmap?center={{location.addressDisplay}}&zoom=15&size=260x300&maptype=roadmap
+          &markers=color:red%7Clabel:%7C{{location.x}},{{location.y}}&key=AIzaSyCkFE3yHxmjakZiQbPB8WsFQB1KoM-zoIw" alt="Google Map of {{location.addressDisplay}}">
+<<<<<<< HEAD
+=======
+        
+>>>>>>> Static_maps_and_My_Profile
+        <!-- <agm-map [latitude]="location.x" [longitude]="location.y" [zoom]="mapzoomlevel" [zoomControl]="false" [panControl]="false"
+        [streetViewControl]="false">
+            <agm-marker [latitude]="location.x" [longitude]="location.y"></agm-marker>
+        </agm-map> -->
+      </div>
+    </div>
+  </div>
+
+ 
+
+<app-dialog [(visible)]="showdialogbox" (visibleChange)="reloadList($event)" [(objectVal)]="showdialogbox">
+  <app-addlocation [(editid)]="editid" (closepopupChange)='changedialogValue($event)'></app-addlocation>
+</app-dialog>

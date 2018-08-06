@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-sm-12">
+      <div class="white_container">
+          <h1>{{addeditlocationmessage}} <button type="button" class="btn register_btn pull-right" [disabled]="!enableDelete" (click)='deleteLocation(name);'>Delete</button></h1>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="row">
+              <div class="col-sm-7 maps">
+                  <agm-map [latitude]="lat" [longitude]="lng"     [zoom]="mapzoomlevel" [zoomControl]="false"  [panControl]="false"
+                  [streetViewControl]="false">
+                      <agm-marker [latitude]="lat" [longitude]="lng" [markerDraggable]="true"
+                      (dragEnd)="markerDragEnd($event)"></agm-marker>
+                  </agm-map>
+                  
+              </div>
+              <div class="col-sm-5 m-t-60">
+                  <form #taskForm="ngForm" name="form">           
+                      <div class="row">
+                        <div class="col-sm-12 m-b-30">
+                          <div class="form-group">
+                            <label>Search</label>
+                            <ng4geo-autocomplete  (focusout)="onSearchChange($event.target.value)"  [userSettings]="userSettings3" class="geoSearch" aria-placeholder="Essie" (componentCallback)="autoCompleteCallback1($event)"></ng4geo-autocomplete>
+                             <input type="hidden" value={{address}} name="AddressDisplay" [(ngModel)]="model.AddressDisplay" #AddressDisplay="ngModel" class="form-control custom_form"  placeholder="Address">
+                             <!-- <input type="hidden" value={{pla}} name="AddressDisplay" [(ngModel)]="model.AddressDisplay" #AddressDisplay="ngModel" class="form-control custom_form"  placeholder="Address"> -->
+                          </div>
+                        </div>
+                    
+                        <div class="col-sm-12 m-b-10">
+                            <div class="form-group">
+                              <label>Location Name</label>
+                              <input type="text" value={{name}}  name="locationName" [(ngModel)]="model.locationName" #locationName="ngModel"    class="form-control custom_form" placeholder="Shop">
+                            </div>
+                          </div>  
+                      </div>
+                     <!-- <div class="row">
+                        <div class="col-sm-12">
+                            <div *ngIf="error" class="alert alert-danger clear">{{error}}</div>
+                        </div>   
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-12">
+                            <div *ngIf="success" class="alert alert-danger clear">{{success}}</div>
+                        </div>   
+                      </div> -->
+                   </form>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="row">
+              <div class="col-sm-5">
+                  <button type="button" class="btn register_btn" (click)="cancelpopupchanges()" data-dismiss="modal">Cancel</button>
+              </div>
+              <div class="col-sm-5">
+                  <button type="button" [disabled]="loading" *ngIf="saveMode" (click)="saveLocation()" class="btn btn_signin">Save</button>
+                  <button type="button" [disabled]="loading" *ngIf="!saveMode" (click)="updateLocation()" class="btn btn_signin">Update</button>
+              </div>
+            </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <app-alert></app-alert>

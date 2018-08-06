@@ -1,0 +1,47 @@
+<ng-progress id="bar-one" #barOne spinnerPosition="left"></ng-progress>
+<div class="text-center">
+  <div class="login">
+    <h1>Sign In</h1>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+      <div class="row m-b-30">
+        <div class="col-sm-12">
+          <div class="form-group m-b-30" [ngClass]="{ 'has-error':f.submitted && !email.valid }">
+            <label for="email">Email</label>
+            <input type="text" [(ngModel)]="model.email" #email="ngModel" id="email" name="email" required email class="form-control custom_form"
+              placeholder="email" />
+            <div *ngIf="(f.submitted||email.touched) && !email.valid" class="help-block">
+              Invalid Email
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 m-b-10">
+          <div class="form-group" [ngClass]="{ 'has-error':f.submitted && !password.valid }">
+            <label for="password">Password</label>
+            <input type="password" name="password" #password="ngModel" required class="form-control custom_form" [(ngModel)]="model.password"
+              placeholder="Password" />
+            <div *ngIf="(f.submitted||email.touched) && !email.valid" class="help-block">
+              Password Is required
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label class="chk_outer">Remember me
+              <input type="checkbox" checked="checked">
+              <span class="checkmark"></span>
+            </label>
+            <a href="#" class=" forgot_password pull-right">Forgot Password ?</a>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <button [disabled]="loading" class="btn btn_signin" (click)="barOne.start()">Sign In</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="error" class="alert alert-danger clear">{{error}}</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

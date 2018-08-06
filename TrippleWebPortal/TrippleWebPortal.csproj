@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Content Remove="dist\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <None Remove="dist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="src\app\app.component.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Net.Compilers" Version="2.8.2" />
+  </ItemGroup>
+
+</Project>

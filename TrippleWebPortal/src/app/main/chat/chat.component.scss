@@ -1,0 +1,38 @@
+.chats {
+    background: #f5f6fa; padding: 10px; border-radius: 4px;
+    ul {
+        margin: 0; 
+        padding: 0;
+        float: left;
+        width: 100%;
+        height: 290px; 
+        overflow-y: scroll;
+        li{ 
+            margin: 8px 0;
+            list-style: none; 
+            border-bottom: solid 1px #fff; 
+            float: left; 
+            width: 100%;
+            img { margin-right: 10px;}
+        h5 { color: #a6aada; 
+            margin-bottom: 5px; margin-top: 3px;}
+        p { width: 55%;}
+        .pull-right {
+            img { margin-left: 10px; margin-right: 0px;}
+        }
+        }
+    }
+    .btn_signin{
+        background: #8c91da;
+        float: left;
+        color: #fff;
+        padding: 5px 20px;
+        margin-top: 18px;
+        font-size: 14px;}
+        .btn_signin:hover{
+            color: #fff;}
+            input { margin-top: 18px;
+                background: transparent !important; 
+                border: 0 !important; 
+                box-shadow: none !important;}
+}

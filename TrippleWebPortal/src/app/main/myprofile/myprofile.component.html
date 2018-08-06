@@ -1,0 +1,274 @@
+<app-header></app-header>
+<div class="container">
+    <div class="col-sm-offset-1">
+        <div class="col-sm-6">
+            <div class="white_container">
+                <h1>My Account</h1>
+                <div class="text-center userPic">   
+                    <div class="userPic_outer">
+                    <div class="userPic_inner">
+                        <img src="{{model.avatarUrl}}" (error)="errorHandler($event)" alt="Profile Pic">
+                    </div> 
+                    <label *ngIf="!showProfileDialog" for="file">
+                            <span class="fa fa-camera"></span>
+                    </label>                
+                </div>
+                    <input style="display: none;" *ngIf="!showProfileDialog" type="file" id="file" (change)="handleFileInput($event.target.files)" />
+                </div>
+                <div class="infoProfile1">
+
+                    <form name="form" (ngSubmit)="f.form.valid && saveProfile()" #f="ngForm">
+                        <div class="userSection">
+                            <div class="row">
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label>Name</label>
+                                        <p *ngIf="showProfileDialog">{{model.firstName}}</p>
+                                        <div *ngIf="!showProfileDialog">
+                                            <input value={{firstName}} type="text" class="form-control custom_form" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel"
+                                                [ngClass]="{ 'is-invalid': f.submitted && firstName.invalid }" required />
+                                            <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback" class="text-danger">
+                                                <div *ngIf="firstName.errors.required">
+                                                    FirstName is required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label>Surname</label>
+                                        <p *ngIf="showProfileDialog">{{model.lastName}}</p>
+                                        <div *ngIf="!showProfileDialog">
+                                            <input value={{lastName}} name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" type="text" class="form-control custom_form"
+                                                [ngClass]="{ 'is-invalid': f.submitted && lastName.invalid }" required>
+                                            <div *ngIf="f.submitted && lastName.invalid" class="invalid-feedback" class="text-danger">
+                                                <div *ngIf="lastName.errors.required">
+                                                    lastName is required
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <p *ngIf="showProfileDialog">{{model.email}}</p>
+                                        <div *ngIf="!showProfileDialog">
+                                            <input type="email" email value={{email}} name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+                                                required class="form-control custom_form">
+                                            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback" class="text-danger">
+                                                <div *ngIf="email.errors.required">
+                                                    Email is required
+                                                </div>
+                                                <div *ngIf="email.errors?.email">
+                                                    Email is not valid.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label>Phone Number</label>
+                                        <p *ngIf="showProfileDialog">{{model.phoneNumber}}</p>
+                                        <div *ngIf="!showProfileDialog">
+                                            <input value={{phoneNumber}} type="text" maxlength="10" pattern="[0-9]+" name="phoneNumber" [(ngModel)]="model.phoneNumber"
+                                                #phoneNumber="ngModel" [ngClass]="{ 'is-invalid': f.submitted && phoneNumber.invalid }"
+                                                required class="form-control custom_form" placeholder="">
+                                            <div *ngIf="f.submitted && phoneNumber.invalid" class="invalid-feedback" class="text-danger">
+                                                <div *ngIf="phoneNumber.errors.required">
+                                                    phoneNumber is required
+                                                </div>
+
+                                                <div *ngIf="phoneNumber.errors.pattern">
+                                                    phoneNumber is invalid
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="form-group">
+                                        <label>Age</label>
+                                        <p *ngIf="showProfileDialog">{{calculateAge(model.dob)}}</p>
+                                        <div *ngIf="!showProfileDialog">
+                                            <input [ngModel]="model.dob | date:'yyyy-MM-dd'" (ngModelChange)="model.dob = $event" type="date" name="startDate" />
+                                            <!-- <input   type="date" [ngModel] ="model.dob"  value="{{model.dob| date : 'yyyy-MM-dd'}}"  > -->
+
+                                            <!-- <input valueAsDate={{model.dob|date)} (ngModelChange)="dt = $event" pattern="dd/MM/YYYY" name="dob" [(ngModel)]="model.dob"
+                                                #dob="ngModel" type="date" class="form-control custom_form" placeholder="21"> -->
+                                            <!-- <div *ngIf="f.submitted && firstName.invalid" class="invalid-feedback" class="text-danger">
+                                            <div *ngIf="firstName.errors.required">
+                                                FirstName is required
+                                            </div>
+                                        </div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <p *ngIf="showProfileDialog">{{model.genderText}}</p>
+                                        <div *ngIf="!showProfileDialog">
+                                                <select name="gender" required #gender="ngModel" [(ngModel)]="model.gender"> 
+                                                        <option [ngValue]="0" disabled>Please select</option>
+                                                        <option [ngValue]="1" >Male</option>
+                                                        <option [ngValue]="2" >Female</option>                                                       
+                                                    </select> 
+                                            <!-- <input value={{gender}} name="gender" [(ngModel)]="model.gender" #gender="ngModel" type="text" [ngClass]="{ 'is-invalid': f.submitted && gender.invalid }"
+                                                required class="form-control custom_form"> -->
+                                            <div *ngIf="f.submitted && gender.invalid" class="invalid-feedback" class="text-danger">
+                                                <div *ngIf="gender.errors.required">
+                                                    gender is required
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button type="button" (click)="logoutUser()" class="btn register_btn">Logout</button>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" *ngIf="showProfileDialog" (click)="showProfileEditDialogbox();" class="btn btn_signin">Edit</button>
+                                        <button type="submit" *ngIf="!showProfileDialog" class="btn btn_signin">save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="white_container accPwd">
+
+                <!-- <div class="infoProfile2">
+                <button type="button" class="btn btn_signin">Change Password</button>
+            </div> -->
+                <div class="infoProfile2 m-t-30">
+                    <h1>Account Password</h1>
+                    <form name="form" (ngSubmit)="p.form.valid && savepassword()" #p="ngForm">
+                        <div *ngIf="!showEditPasswordDialog" class="row">
+                            <div class="col-sm-12 col-xs-12 m-b-10">
+                                <div class="form-group">
+                                    <label>Old Password</label>
+                                    <input name="oldPassword" [(ngModel)]="pwdmodel.oldPassword" #oldPassword="ngModel"  type="{{txtpwdtype}}" class="form-control custom_form"
+                                        [ngClass]="{ 'is-invalid': p.submitted && oldPassword.invalid }" required placeholder="">
+                                    <div *ngIf="p.submitted && oldPassword.invalid" class="invalid-feedback" class="text-danger">
+                                        <div *ngIf="oldPassword.errors.required">
+                                            Old Password is required
+                                        </div>
+                                    </div>
+                                
+                                    <i  class="{{cssOldPwd}}"   (click)="toggleOldPwdShow()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 m-b-10">
+                                <div class="form-group">
+                                    <label>New Password</label>
+                                    <input type="password" name="newPassword" [(ngModel)]="pwdmodel.newPassword"  type="{{txtnewpwdtype}}" #newPassword="ngModel" class="form-control custom_form"
+                                        [ngClass]="{ 'is-invalid': p.submitted && newPassword.invalid }" required placeholder="">
+                                    <div *ngIf="p.submitted && newPassword.invalid" class="invalid-feedback" class="text-danger">
+                                        <div *ngIf="newPassword.errors.required">
+                                            New Password is required
+                                        </div>
+                                    </div>
+                                    <i class="{{cssNewPwd}}"  (click)="toggleNewPwdShow()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-12 col-xs-12 m-b-10">
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type="password" class="form-control custom_form" required placeholder="*******">
+                                    <i class="fa fa-eye eye_icon" aria-hidden="true"></i>                
+                                </div>
+                        </div> -->
+                        </div>
+                        <button *ngIf="showEditPasswordDialog" type="button" (click)="editpassword();" class="btn btn_signin">Change Password</button>
+                        <button *ngIf="!showEditPasswordDialog" type="submit" class="btn btn_signin">Save</button>
+                        <button *ngIf="!showEditPasswordDialog" type="button" (click)="editpassword();" class="btn register_btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+            <div class="white_container">
+
+                <div class="infoProfile3 m-t-30">
+                    <h1>Emergency Password</h1>
+                    <form name="form" (ngSubmit)="emg.form.valid && saveEMGpassword()" #emg="ngForm">
+                        <div *ngIf="showEMGPasswordDialog" class="emergencyPwd">
+                            <div class="form-group">
+                                <label>Hint to Emergency mode password</label>
+                                <p>Mother's maiden name?</p>
+                            </div>
+                        </div>
+                        <div *ngIf="!showEMGPasswordDialog" class="emergencyPwd">
+
+                            <div class="col-sm-12 col-xs-12 m-b-10">
+                                <div class="form-group">
+                                    <label>Old Password</label>
+                                    <input type="password"  type="{{txtoldEMGpwdtype}}" name="oldPassword" [ngClass]="{ 'is-invalid': emg.submitted && newPassword.invalid }" [(ngModel)]="EMGpwdmodel.oldPassword"
+                                        #oldPassword="ngModel" type="password" class="form-control custom_form" required placeholder="*******">
+                                    <div *ngIf="emg.submitted && newPassword.invalid" class="invalid-feedback" class="text-danger">
+                                        <div *ngIf="newPassword.errors.required">
+                                            Old Password is required
+                                        </div>
+                                    </div>
+                                   
+                                    <i class="{{cssOldEMgPwd}}"  (click)="toggleEMGOldPwdShow()"  class="fa fa-eye-slash eye_icon"  aria-hidden="true"></i>
+                          
+                                  
+                                    
+                                  
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-xs-12 m-b-10">
+                                <div class="form-group">
+                                    <label>New Password</label>
+                                    <input type="password"  type="{{txtnewEMGpwdtype}}" name="newPassword" [ngClass]="{ 'is-invalid': emg.submitted && newPassword.invalid }" [(ngModel)]="EMGpwdmodel.newPassword"
+                                        #newPassword="ngModel" type="password" class="form-control custom_form" required placeholder="*******">
+                                    <div *ngIf="emg.submitted && newPassword.invalid" class="invalid-feedback" class="text-danger">
+                                        <div *ngIf="newPassword.errors.required">
+                                            New Password is required
+                                        </div>
+                                    </div>
+
+                                    <i class="{{cssNewEMgPwd}}" class="fa fa-eye eye_icon" (click)="toggleEMGNewPwdShow()" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-12 col-xs-12 m-b-10">
+                                    <div class="form-group">
+                                        <label>Confirm Password</label>
+                                        <input type="password" class="form-control custom_form" required placeholder="*******">
+                                        <i class="fa fa-eye eye_icon" aria-hidden="true"></i>                
+                                    </div>
+                                </div> -->
+                            <div class="col-sm-12 col-xs-12 m-b-10">
+                                <div class="form-group">
+                                    <label>Hint to Emergency mode password</label>
+                                    <input type="text" class="form-control custom_form" required placeholder="Mother's maiden name?">
+                                </div>
+                            </div>
+                        </div>
+                        <button *ngIf="showEMGPasswordDialog" type="button" (click)="editEMGpassword();" class="btn btn_signin">Edit</button>
+                        <button *ngIf="!showEMGPasswordDialog" type="submit" class="btn btn_signin">Save</button>
+                        <button *ngIf="!showEMGPasswordDialog" type="button" (click)="editEMGpassword();" class="btn register_btn">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

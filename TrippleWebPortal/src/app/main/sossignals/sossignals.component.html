@@ -1,0 +1,122 @@
+<app-header></app-header>
+<div class="container">
+  <div class="white_container">
+    <div class="row">
+      <div class="col-sm-7 p-r-0">
+        <div class="sos_map">
+             <agm-map 
+                [latitude]="lat"
+                [longitude]="lng"
+                [zoom]="15"
+                [zoomControl]="false" 
+                [panControl]="false"
+                [streetViewControl]="false"
+                [disableDefaultUI]="false"                
+                (mapClick)="mapClicked($event)">  
+                <agm-marker
+                    [latitude]="lat"
+                    [longitude]="lng"    
+                    (dragEnd)="markerDragEnd(m, $event)"            
+                    [iconUrl]="'/assets/img/indicator1a.jpg'">
+               </agm-marker>
+                <agm-polyline  [strokeColor]="'#2196f3'">
+                    <ng-container *ngFor="let i of etrackpoints">
+                       <agm-polyline-point    [latitude]="i.x" [longitude]="i.y">
+                       </agm-polyline-point>
+                    </ng-container>
+                </agm-polyline>              
+              
+                <!-- <agm-marker 
+                    *ngFor="let m of etrackpoints;"                   
+                    [latitude]="m.x"
+                    [longitude]="m.y"                   
+                    [iconUrl]="'/assets/img/indicator5.png'"
+                    [markerDraggable]="m.draggable"
+                    (dragEnd)="markerDragEnd(m, $event)">
+                    
+                  <agm-info-window>
+                    <strong>InfoWindow content</strong>
+                  </agm-info-window>
+                  
+                </agm-marker> -->
+                
+                 <agm-circle [latitude]="m.x" [longitude]="m.y" 
+                 *ngFor="let m of etrackpoints"                 
+                    
+                    [fillColor]="'red'"
+                    [circleDraggable]="true"
+                    [editable]="true">
+                </agm-circle> -->
+              
+              </agm-map>
+              
+              
+        </div>
+        <div class="sos_indicator">
+          <div class="row">
+          <div class="col-sm-5">
+              <img src="../../assets/img/indicator1a.jpg" alt="Indicator 1">
+            <p>User Location</p>
+          </div>
+          <div class="col-sm-3">
+              <img src="../../assets/img/indicator2.png" alt="Indicator 2">
+              <p>User Destination</p>
+          </div>
+          <!-- <div class="col-sm-3">
+              <img src="../../assets/img/indicator3.png" alt="Indicator 3">
+              <p>Start of the User Path</p>
+          </div> -->
+          <div class="col-sm-3">
+              <img src="../../assets/img/indicator4a.jpg" alt="Indicator 4">
+              <p>Walking</p>
+          </div>
+        </div>
+        </div>
+        <div class="sos_indicator">
+            <div class="row">
+            <div class="col-sm-5">
+                <img src="../../assets/img/indicator5.png" alt="Indicator 5">
+                <p>Emergency information about the user</p>
+            </div>
+            <div class="col-sm-3">
+               <img src="http://tzapi-dev.us-west-2.elasticbeanstalk.com/api/attachments/{{user.avatarId}}"  (error)="errorHandler($event)" alt="Profile Pic" class="user_pic2" >
+               
+                <p>User's photo</p>
+            </div>
+            <div class="col-sm-3">
+                <img src="../../assets/img/indicator7a.jpg" alt="Indicator 7">
+                <p>Emergency</p>
+            </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-5 p-r-0">
+        <div class="row">
+        <div class="col-sm-12">
+          <div class="col-sm-2">
+            <img src="http://tzapi-dev.us-west-2.elasticbeanstalk.com/api/attachments/{{user.avatarId}}" (error)="errorHandler($event)" alt="Profile Pic" class="user_pic">              
+          </div>
+          <div class="col-sm-10">
+              <h2>{{user.firstName}} {{user.lastName}}</h2>
+              <h1>{{user.phoneNumber}}</h1>
+          </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="custom-tabs">
+                <tabset type="pills">                        
+                    <tab heading="Chat">
+                        <app-chat></app-chat>
+                    </tab>  
+                    <tab heading="TrackPoints">
+                        <app-trackpoints [(etrackpoints)]="etrackpoints" ></app-trackpoints>
+                    </tab>                      
+                </tabset>        
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

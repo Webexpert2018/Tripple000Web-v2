@@ -1,0 +1,42 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="location-section add-location" (click)="showcontactDialogbox()">
+        <span class="fa fa-plus location-plus"></span>
+        <div class="add-location-bottom">
+          <h2>Add Contact</h2>
+          <h3>Press on this box to add new contact.</h3>
+        </div>
+      </div>
+    </div>
+
+    <div *ngFor="let contact of contactsdata; let i = index;" class="col-sm-3">
+        <div class="mysafety-section">
+            <div>
+                <span class="fa fa-pencil edit" (click)="editcircle(contact.id)"></span>
+                <div class="text-center">
+                  <div class="userPic">
+                  <img *ngIf="contact.photoId!=null; else elseBlock" src="{{imageUrl}}{{contact.photoId}}" alt="image of {{contact.name}}">
+                </div>
+                </div>
+                <ng-template #elseBlock>
+                    <div>
+                        <img src="../../assets/img/user.png" alt="default user image">
+                    </div> 
+                </ng-template>
+              </div>
+              <h4>{{contact.name}}</h4>
+              <h5>{{contact.email}}</h5>
+              <p class="mysafety_contact">{{contact.phoneNo}}</p>
+        </div>
+    </div> 
+  </div>
+</div>>
+<!-- <app-dialog [(visible)]="showaddContact">
+  <app-addcontact></app-addcontact>
+</app-dialog> -->
+
+<app-dialog [(visible)]="showaddContact" (visibleChange)="reloadList($event)" [(objectVal)]="showaddContact">
+    <app-addcontact [(editid)]="editid" (closepopupChange)='changedialogValue($event)'></app-addcontact>
+  </app-dialog>

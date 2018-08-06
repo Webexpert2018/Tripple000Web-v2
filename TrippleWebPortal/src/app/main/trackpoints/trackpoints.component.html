@@ -1,0 +1,10 @@
+<div class="col-sm-12 trackpoints">
+  <h4>History</h4>
+  <ul  *ngFor="let point of etrackpoints ; let i = index;">
+    <li>
+     <span class="pull-left">{{point.address!=null?point.address.address:''}}</span>
+            <!-- <reverse-geocode lat={{point.x}} lng={{point.y}}></reverse-geocode> -->
+      <span class="pull-right">{{point.tpTime| date : "h:mm a"}}</span>
+    </li>    
+  </ul>
+</div>

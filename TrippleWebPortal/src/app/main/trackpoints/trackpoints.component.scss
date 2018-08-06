@@ -1,0 +1,22 @@
+
+.trackpoints {
+    h4 {
+        color: #999999;
+        margin-bottom: 5px;
+    }
+    ul {
+    margin: 0; padding: 0;
+    li { 
+        list-style: none; 
+        padding: 12px 0 10px 0;
+        border-bottom: solid 1px #f2f3f4; 
+        float: left; 
+        width: 100%;
+        color: #707070;
+        font-size: 14px;
+    &:last-child {
+        border-bottom: solid 0px #f2f3f4;
+    }
+    }
+    }
+}

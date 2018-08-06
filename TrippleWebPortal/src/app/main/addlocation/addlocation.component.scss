@@ -1,0 +1,62 @@
+input::-webkit-input-placeholder {
+    color:#000!important;
+        font-size: 12px;
+    }
+     input:-moz-placeholder { /* Firefox 18- */
+    color:#000 !important;
+        font-size: 12px;
+    }
+     input::-moz-placeholder {  /* Firefox 19+ */
+    color: #000 !important; 
+        font-size: 12px;
+    }
+.white_container{	
+    background: #fff; 
+    // width: 395px;
+    margin:1% auto 0;  
+    padding: 25px; 
+    // border-radius: 4px;
+    vertical-align: middle;
+    text-align: left;
+    .m-t-60 {margin-top:60px;}
+    label{
+        color: #9d9d9d;
+        font-weight: normal;
+        font-size: 14px !important;}
+    h1{
+        margin-top:0px; 
+        width:100%; 
+        float: left;
+        font-size: 18px;
+        margin-bottom: 0px; 
+        color: #9d9d9d;
+    .register_btn { width: auto !important; margin-top: 0;}
+    }
+        .custom_form{
+            border: none !important;
+            border-bottom: solid 1px #ccc !important;
+            box-shadow: none !important;
+            border-radius: 0px !important;
+            padding-left: 0px !important;}
+        .m-b-30{
+            margin-bottom: 37px;}
+        .m-b-10{
+            margin-bottom: 10px;}
+            .btn_signin{
+                background: #8c91da;
+                float: left;
+                width: 100%;
+                color: #fff;
+                padding: 12px;
+                margin-top: 18px;
+                font-size: 16px;}
+                .register_btn{
+                    float:left; 
+                    width:100%;
+                    background:#fff;
+                    box-shadow: 0 2px 4px 0 rgba(231,231,231,0.31);
+                    padding:12px;
+                    border: solid 1px #e5e9f2;
+                    margin-top: 20px;
+                    font-size: 16px;}
+}

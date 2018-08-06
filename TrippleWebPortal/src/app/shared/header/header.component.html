@@ -1,0 +1,30 @@
+<header>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="../../assets/img/logo.png" alt="Logo"></a>
+                <button class="navbar-toggler navbar_custom" type="button" (click)="toggleNavbar()">
+                        <span class="icon-bar"></span>
+                         <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                                          
+                  </button>
+            </div>
+            <div class="collapse navbar-collapse"  [ngClass]="{ 'show': navbarOpen }">
+            <ul class="nav navbar-nav">
+                <li><a routerLink="/main/geolocations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Locations</a></li>
+                <li><a routerLink="/main/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+                <li><a routerLink="/main/mycircle" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">my Safety Circle</a></li>
+                <li><a routerLink="/main/sossignals" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">SOS Signals</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a routerLink="/main/profile" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><span>
+                    
+                    <img src="{{imageurl}}" alt="User" class="userPic"></span>{{username}}</a></li>
+                <li><a (click)="logoutUser()" class="logout"><span class="fa fa-sign-out"></span>&nbsp;Log Out</a></li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+</header>
+

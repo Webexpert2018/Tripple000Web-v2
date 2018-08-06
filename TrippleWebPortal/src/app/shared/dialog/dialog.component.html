@@ -1,0 +1,8 @@
+<div [@dialog] *ngIf="visible" class="dialog" >
+  <ng-content></ng-content>
+ 
+  <button *ngIf="closable" data-dismiss="modal" class="fancybox-close" type="button" (click)="close()">
+    <span>x</span>
+  </button>
+</div>
+<div *ngIf="visible" class="overlay" (click)="close()"></div>
